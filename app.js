@@ -5,12 +5,14 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const authRouter = require("./routes/authRouter");
 const customerRouter = require("./routes/customerRouter");
+const crudController = require("./routes/crudRouter")
 
 var app = express();
 app.use(express.json())
 
 app.use("/auth", authRouter);
 app.use("/customer", customerRouter);
+app.use("/crud", crudController)
 // view engine setup
 
 app.set("view engine", "jade");
