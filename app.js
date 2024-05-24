@@ -1,18 +1,20 @@
 var createError = require("http-errors");
 var express = require("express");
-var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+
 const authRouter = require("./routes/authRouter");
 const customerRouter = require("./routes/customerRouter");
-const crudController = require("./routes/crudRouter")
+const crudController = require("./routes/crudRouter");
+const userRouter = require("./routes/userRouter");
 
 var app = express();
-app.use(express.json())
+app.use(express.json());
 
 app.use("/auth", authRouter);
 app.use("/customer", customerRouter);
-app.use("/crud", crudController)
+app.use("/crud", crudController);
+app.use("/user", userRouter);
 // view engine setup
 
 app.set("view engine", "jade");

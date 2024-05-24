@@ -15,8 +15,8 @@ sequelize
   .then(() => {
     console.log("Successfully connected");
   })
-  .catch((errror) => {
-    console.log("Unable to connect");
+  .catch((error) => {
+    console.log("Unable to connect", error.message);
   });
 
 module.exports = sequelize;
