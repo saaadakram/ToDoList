@@ -35,4 +35,45 @@ module.exports = {
       };
     }
   },
+
+  getAllUsers: async () => {
+    try {
+      const user = await userModel.getAllUsers();
+      if (user.error) {
+        return {
+          message: "No user existed",
+        };
+      }
+      return {
+        response: user.response,
+      };
+    } catch (error) {
+      return {
+        error: error,
+      };
+    }
+  },
+  deleteUser: async (userId) => {
+    try {
+      const deleteUser = await userModel.deleteUser(userId);
+      if (deleteUser.error || !deleteUser.response) {
+        return {
+          error: {
+            message: "Unable to delete user",
+            error: deleteUser?.error || deleteUser.response,
+          },
+        };
+      }
+      return {
+        response: {
+          message: "user deleted",
+          response: deleteUser.response,
+        },
+      };
+    } catch (error) {
+      return {
+        error: error,
+      };
+    }
+  },
 };

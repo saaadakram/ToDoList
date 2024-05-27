@@ -6,6 +6,15 @@ const createUserSchema = joi.object().keys({
   confirmPassword: joi.ref("password"),
 });
 
+const getUserSchema = joi.object().keys({
+  userName: joi.string().min(5).max(20).required(),
+  password: joi.string().required(),
+});
+
+const deleteUserschema = joi.object().keys({
+  userPassword: joi.string().required(),
+});
+
 module.exports = {
   createUser: async (req, res) => {
     try {
@@ -24,11 +33,50 @@ module.exports = {
     }
   },
   getUser: async (req, res) => {
-    console.log("inside getuser");
     try {
-      res.send({ message: "i am connected" });
+      const userValidate = await getUserSchema.validateAsync(req.body);
+      const user = await userService.getUser(userValidate);
+      if (user.error) {
+        return res.send({
+          error: user.error,
+        });
+      }
     } catch (error) {
       return res.send({ message: error.message });
+    }
+  },
+
+  getAllUsers: async (req, res) => {
+    try {
+      const user = await userService.getAllUsers();
+      if (user.error) {
+        return res.send({
+          error: user.error,
+        });
+      }
+      return res.send({
+        response: user.response,
+      });
+    } catch (error) {
+      return res.send({ message: error.message });
+    }
+  },
+  deleteUser: async (req, res) => {
+    try {
+      const validate = await deleteUserschema.validateAsync(req.query);
+      const deleteUser = await userService.deleteUser(validate.userId);
+      if (deleteUser.error) {
+        return res.send({
+          error: deleteUser.error,
+        });
+      }
+      return res.send({
+        response: deleteUser.response,
+      });
+    } catch (error) {
+      return res.send({
+        message: error.message,
+      });
     }
   },
 };
