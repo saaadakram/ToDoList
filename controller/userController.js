@@ -12,7 +12,7 @@ const getUserSchema = joi.object().keys({
 });
 
 const deleteUserschema = joi.object().keys({
-  userPassword: joi.string().required(),
+  userId: joi.string().required(),
 });
 
 module.exports = {
