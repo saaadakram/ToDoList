@@ -7,6 +7,7 @@ const authRouter = require("./routes/authRouter");
 const customerRouter = require("./routes/customerRouter");
 const crudController = require("./routes/crudRouter");
 const userRouter = require("./routes/userRouter");
+const taskRouter = require("./routes/taskRouter");
 
 var app = express();
 app.use(express.json());
@@ -15,6 +16,7 @@ app.use("/auth", authRouter);
 app.use("/customer", customerRouter);
 app.use("/crud", crudController);
 app.use("/user", userRouter);
+app.use("/task", taskRouter);
 // view engine setup
 
 app.set("view engine", "jade");
