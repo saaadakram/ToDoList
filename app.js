@@ -2,6 +2,7 @@ var createError = require("http-errors");
 var express = require("express");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+const cors = require("cors");
 
 const authRouter = require("./routes/authRouter");
 const customerRouter = require("./routes/customerRouter");
@@ -25,6 +26,12 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(
+  cors({
+    credentials: true,
+    origin: true,
+  })
+);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
