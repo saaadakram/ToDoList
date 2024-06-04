@@ -11,13 +11,19 @@ module.exports = {
     try {
       const validate = await loginSchema.validateAsync(req.body);
       const login = await authService.login(validate);
+      if (login.error) {
+        return res.send({
+          error: login.error,
+        });
+      }
+      res.cookie("auth", login.response.token);
+      delete login.response.token;
 
       return res.send({
-        message: "User Registered",
-        data: validate,
+        response: login.response,
       });
     } catch (error) {
-      return res.send({ message: error.message });
+      return res.send({ message: error });
     }
   },
   logout: (req, res) => {

@@ -1,7 +1,7 @@
 const joi = require("joi");
 const taskService = require("../services/taskService");
 const createTaskSchema = joi.object().keys({
-  taskName: joi.string().min(5).max(20).required(),
+  taskName: joi.string().min(5).max(255).required(),
   taskInfo: joi.string(),
   userId: joi.string().length(36).required(),
 });

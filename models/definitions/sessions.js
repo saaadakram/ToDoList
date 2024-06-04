@@ -2,25 +2,23 @@ const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../../bin/dbConnection");
 const users = require("./users");
 
-class tasks extends Model {}
+class sessions extends Model {}
 
-tasks.init(
+sessions.init(
   {
-    taskId: {
+    sessionId: {
       primaryKey: true,
       type: DataTypes.STRING(255),
     },
-    taskName: {
+    token: {
+      unique: true,
       allowNull: false,
-      type: DataTypes.STRING(1000),
-    },
-    taskInfo: {
-      allowNull: true,
       type: DataTypes.STRING(1000),
     },
     userId: {
       allowNull: false,
       type: DataTypes.STRING(500),
+      unique: true,
       references: {
         model: users,
         key: "userId",
@@ -28,11 +26,9 @@ tasks.init(
     },
   },
   {
-    timestamps: true,
-    paranoid: true,
-    tableName: "tasks",
+    tableName: "sessions",
     sequelize,
   }
 );
 
-module.exports = tasks;
+module.exports = sessions;

@@ -34,7 +34,9 @@ module.exports = {
   getAllTasks: async () => {
     try {
       const task = await models.tasks.findAll({
-        attributes: ["taskId", "taskName", "taskInfo"],
+        attributes: {
+          exclude: ["deletedAt"],
+        },
       });
       return {
         response: task,

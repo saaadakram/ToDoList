@@ -28,7 +28,7 @@ module.exports = {
       const task = await taskModel.getAllTasks();
       if (task.error) {
         return {
-          message: "No task existed",
+          error: "No task existed",
         };
       }
       return {
