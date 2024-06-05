@@ -6,6 +6,7 @@ const {
   getAllUsers,
   deleteUser,
 } = require("../controller/userController");
+const { middleware } = require("../middleware");
 
 router.get("/getUser", getUser);
 router.get("/getAllUsers", getAllUsers);

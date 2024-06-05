@@ -2,7 +2,7 @@ const joi = require("joi");
 const authService = require("../services/authService");
 
 const loginSchema = joi.object().keys({
-  name: joi.string().required(),
+  userName: joi.string().required(),
   password: joi.string().min(3).max(9).required(),
 });
 

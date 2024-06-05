@@ -1,7 +1,7 @@
 require("dotenv").config;
 const { compare } = require("bcryptjs");
 const userModel = require("../models/userModel");
-const { response } = require("../app");
+
 const { sign } = require("jsonwebtoken");
 
 module.exports = {
@@ -31,11 +31,12 @@ module.exports = {
       }
       delete user.response.dataValues.password;
       const token = sign(user.response.dataValues, process.env.SECRET);
-      console.log("token", token);
+      
       return {
         response: {
           message: "logged in successfully",
           response: true,
+          token:token
         },
       };
     } catch (error) {
