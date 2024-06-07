@@ -9,7 +9,7 @@ const {
 const { middleware } = require("../middleware");
 
 router.get("/getUser", getUser);
-router.get("/getAllUsers", getAllUsers);
+router.get("/getAllUsers", middleware, getAllUsers);
 router.post("/createUser", createUser);
 router.delete("/deleteUser", deleteUser);
 module.exports = router;

@@ -13,11 +13,6 @@ const taskRouter = require("./routes/taskRouter");
 var app = express();
 app.use(express.json());
 
-app.use("/auth", authRouter);
-app.use("/customer", customerRouter);
-app.use("/crud", crudController);
-app.use("/user", userRouter);
-app.use("/task", taskRouter);
 // view engine setup
 
 app.set("view engine", "jade");
@@ -32,6 +27,12 @@ app.use(
     origin: true,
   })
 );
+
+app.use("/auth", authRouter);
+app.use("/customer", customerRouter);
+app.use("/crud", crudController);
+app.use("/user", userRouter);
+app.use("/task", taskRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
